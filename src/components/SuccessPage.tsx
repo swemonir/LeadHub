@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircleIcon, ExternalLinkIcon, DownloadIcon } from 'lucide-react';
+import { CheckCircleIcon, Clock3Icon } from 'lucide-react';
 import { useCurrency } from '../hooks/useCurrency';
 interface SuccessPageProps {
   details: {
@@ -10,18 +10,7 @@ interface SuccessPageProps {
   };
 }
 export function SuccessPage({ details }: SuccessPageProps) {
-  const [countdown, setCountdown] = useState(5);
-  const { config, isBDT } = useCurrency();
-  const driveUrl =
-  'https://drive.google.com/drive/folders/1sCwxkGdQg608gJhv_zq03IlZ5OEdLMXH?usp=sharing';
-  useEffect(() => {
-    if (countdown <= 0) {
-      window.open(driveUrl, '_blank');
-      return;
-    }
-    const timer = setInterval(() => setCountdown((prev) => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [countdown]);
+  const { config } = useCurrency();
   return (
     <motion.div
       initial={{
@@ -58,15 +47,15 @@ export function SuccessPage({ details }: SuccessPageProps) {
           </motion.div>
 
           <h1 className="text-xl md:text-2xl font-bold text-white mb-1">
-            Payment Successful!
+            Request Submitted
           </h1>
           <p className="text-base text-slate-300 mb-5">
-            Your payment has been completed successfully.
+            Your payment details have been submitted successfully.
           </p>
 
           <div className="w-full bg-[#0F172A] ring-1 ring-[#334155] rounded-lg p-4 mb-5 text-left space-y-2.5">
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider pb-2 ring-b ring-[#334155]">
-              Receipt Details
+              Submission Details
             </h3>
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-400">Name</span>
@@ -79,7 +68,7 @@ export function SuccessPage({ details }: SuccessPageProps) {
               </span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-400">Payment ID</span>
+              <span className="text-slate-400">Transaction ID</span>
               <span className="text-white font-mono text-xs">
                 {details.paymentId}
               </span>
@@ -91,38 +80,20 @@ export function SuccessPage({ details }: SuccessPageProps) {
               }}>
               
               <span className="text-slate-400 text-sm">Amount Paid</span>
-              <span
-                className={`text-[#FACC15] font-bold text-base ${isBDT ? 'font-bengali' : ''}`}>
-                
-                {config.price}
-              </span>
+              <span className="text-[#FACC15] font-bold text-base font-bengali">{config.price}</span>
             </div>
           </div>
 
           <div className="space-y-2 mb-5 w-full">
             <div className="flex items-start space-x-2 text-left bg-[#22C55E]/10 ring-1 ring-[#22C55E]/20 rounded-lg p-3">
-              <DownloadIcon className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" />
+              <Clock3Icon className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" />
               <p className="text-xs text-slate-300">
-                A confirmation email with your Google Drive access link has been
-                sent to <strong className="text-white">{details.email}</strong>.
+                You will get a response within <strong className="text-white">2 hours</strong> at <strong className="text-white">{details.email}</strong>.
               </p>
             </div>
             <p className="text-[10px] text-slate-500">
-              Your details have been securely logged to our records.
+              Our team will verify your bKash payment and contact you shortly.
             </p>
-          </div>
-
-          <div className="w-full space-y-3">
-            <p className="text-[#22C55E] text-sm font-medium animate-pulse">
-              Redirecting to Google Drive in {countdown} seconds...
-            </p>
-            <button
-              onClick={() => window.open(driveUrl, '_blank')}
-              className="w-full bg-[#22C55E] hover:bg-[#22C55E]/90 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center space-x-2 text-sm">
-              
-              <span>Access Google Drive Now</span>
-              <ExternalLinkIcon className="w-4 h-4" />
-            </button>
           </div>
         </div>
       </div>

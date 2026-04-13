@@ -157,37 +157,37 @@ export function CurrencyToggleToast() {
           damping: 22,
           stiffness: 280
         }}
-        className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[90] w-[calc(100%-2rem)] max-w-[360px]">
+        className="fixed bottom-5 left-4 right-4 z-[90] mx-auto w-auto max-w-[360px] md:left-1/2 md:right-auto md:w-[calc(100%-2rem)] md:-translate-x-1/2">
         
-          <div className="relative bg-[#1E293B]/80 backdrop-blur-[15px] border border-slate-700/50 rounded-2xl px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+          <div className="relative overflow-hidden bg-[#1E293B]/80 backdrop-blur-[15px] border border-slate-700/50 rounded-2xl px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
             {/* === MISMATCH MODE === */}
             {mode === 'mismatch' && localConfig &&
           <>
                 <p className="text-[12px] text-[#94A3B8] text-center mb-3 font-medium">
                   Switching to local payment?
                 </p>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <button
                 onClick={handleSwitchLocal}
-                className="flex-1 flex items-center justify-center gap-1.5 bg-[#0F172A]/80 hover:bg-[#0F172A] border border-accent rounded-xl py-2.5 px-3 transition-colors">
+                className="flex min-w-0 flex-1 items-center justify-center gap-1.5 bg-[#0F172A]/80 hover:bg-[#0F172A] border border-accent rounded-xl py-2.5 px-3 transition-colors">
                 
                     <span className="flex items-center gap-1.5">
                       <span className="text-base leading-none">
                         {localConfig.flag}
                       </span>
-                      <span className="text-[13px] font-bold text-white">
+                      <span className="min-w-0 truncate text-[13px] font-bold text-white">
                         {localConfig.symbol} {detectedCurrency}
                       </span>
                     </span>
                   </button>
                   <button
                 onClick={handleDismiss}
-                className="flex-1 flex items-center justify-center gap-1.5 bg-transparent border border-slate-700/60 hover:border-slate-600 rounded-xl py-2.5 px-3 transition-colors">
+                className="flex min-w-0 flex-1 items-center justify-center gap-1.5 bg-transparent border border-slate-700/60 hover:border-slate-600 rounded-xl py-2.5 px-3 transition-colors">
                 
                     <span className="text-base leading-none">
                       {config.flag}
                     </span>
-                    <span className="text-[13px] font-medium text-slate-400">
+                    <span className="min-w-0 truncate text-[13px] font-medium text-slate-400">
                       {config.symbol} {currency}
                     </span>
                   </button>
@@ -203,11 +203,11 @@ export function CurrencyToggleToast() {
                   <span className="text-white font-semibold">{currency}</span>".
                   Is that okay?
                 </p>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   {/* Yes, Perfect */}
                   <button
                 onClick={handleDismiss}
-                className="flex-1 flex items-center justify-center gap-1.5 bg-[#0F172A]/80 hover:bg-[#0F172A] border border-accent rounded-xl py-2.5 px-3 transition-colors">
+                className="flex min-w-0 flex-1 items-center justify-center gap-1.5 bg-[#0F172A]/80 hover:bg-[#0F172A] border border-accent rounded-xl py-2.5 px-3 transition-colors">
                 
                     <span className="text-[13px] font-bold text-white">
                       Yes, Perfect
@@ -215,13 +215,13 @@ export function CurrencyToggleToast() {
                   </button>
 
                   {/* Change Currency dropdown */}
-                  <div className="flex-1 relative" ref={dropdownRef}>
+                  <div className="relative flex-1 min-w-0" ref={dropdownRef}>
                     <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className={`w-full flex items-center justify-center gap-1.5 rounded-xl py-2.5 px-3 transition-colors border ${dropdownOpen ? 'bg-[#0F172A]/80 border-accent' : 'bg-transparent border-slate-700/60 hover:border-slate-600'}`}>
+                  className={`w-full min-w-0 flex items-center justify-center gap-1.5 rounded-xl py-2.5 px-3 transition-colors border ${dropdownOpen ? 'bg-[#0F172A]/80 border-accent' : 'bg-transparent border-slate-700/60 hover:border-slate-600'}`}>
                   
                       <GlobeIcon className="w-3.5 h-3.5 text-slate-400" />
-                      <span className="text-[12px] font-medium text-slate-400">
+                      <span className="truncate text-[12px] font-medium text-slate-400">
                         Change
                       </span>
                       <ChevronDownIcon
